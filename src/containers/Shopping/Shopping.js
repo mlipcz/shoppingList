@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Fruit from '../../components/Fruit/Fruit'
-
 import './Shopping.css'
 
 const fruit = [

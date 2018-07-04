@@ -1,9 +1,16 @@
-import './App.css'
 import React, { Fragment } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import Firebase from 'firebase'
+
 import Header from './components/Header/Header'
 import Shopping from './containers/Shopping/Shopping'
 import History from './containers/History/History'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import store from './store'
+
+import axios from './axios-db'
+
+import './App.css'
 
 // const renderMergedProps = (component, ...rest) => {
 //   const finalProps = { ...rest }
@@ -26,34 +33,30 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 class App extends React.Component {
   index = 0
 
-//   constructor (props) {
-//     super()
-//     this.state = localStorage.state == undefined
-//       ? {
-//         list: [],
-//         selectedOption: 'All',
-//         index: 0
-//       }
-//       : JSON.parse(localStorage.state)
-//   }
-
   render () {
     return (
-      <Router>
-        <Fragment>
-          <Header />
-          <Switch>
-            <Route path='/' exact component={Shopping} />
-            <Route path='/history' component={History} />
-          </Switch>
-        </Fragment>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Fragment>
+            <Header />
+            <Switch>
+              <Route path='/' exact component={Shopping} />
+              <Route path='/history' component={History} />
+            </Switch>
+          </Fragment>
+        </Router>
+      </Provider>
     )
   }
 
-//   componentDidUpdate = function (prevProps, prevState) {
-//     localStorage.state = JSON.stringify(this.state)
-//   }
+  //   componentDidUpdate = function (prevProps, prevState) {
+  //     localStorage.state = JSON.stringify(this.state)
+  //   }
+
+  componentWillMount () {
+    axios.post('https://shoppinglist-48680.firebaseio.com/shoppingHistory.json', {label: '1203mati'}).then(res => console.log('post',res));
+    axios.get('/shoppingHistory.json').then(res => {console.log("json",res.data)});
+  }
 }
 
 export default App

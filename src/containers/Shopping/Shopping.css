@@ -1,3 +1,4 @@
 .image {
     width: 30%;
+    max-width: 100px;
 }
