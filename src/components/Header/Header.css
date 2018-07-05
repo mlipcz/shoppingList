@@ -19,3 +19,7 @@ ul li a:hover {
 ul li a.active {
     background: yellow;
 }
+
+header {
+    text-align: center;
+}

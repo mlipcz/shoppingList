@@ -1,4 +1,9 @@
-.image {
+.image1 {
     width: 30%;
     max-width: 100px;
+}
+
+.fruitList {
+    display: flex;
+    flex-wrap: wrap;
 }
