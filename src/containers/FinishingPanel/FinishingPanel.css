@@ -1,0 +1,14 @@
+.finishingPanel {
+    position: fixed;
+    display: block;
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: 60%;
+    background-color: lime;
+    color: black;
+    z-index: 20;
+    border: solid 2px green;
+    text-align: center;
+    padding: 20px;
+}

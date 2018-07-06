@@ -2,32 +2,23 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Fruit from '../../components/Fruit/Fruit'
+import products from '../../staticData'
+
 import './Shopping.css'
 
-const fruit = [
-  { name: 'pear', file: 'nigRCFX', type: 'fruit' },
-  { name: 'tomato', file: 'EnmIQSH', type: 'fruit' },
-  { name: 'strawberry', file: '6DVDOCz', type: 'fruit' },
-  { name: 'cherry', file: 'uSWvDME', type: 'fruit' },
-  { name: 'onion', file: 'n2XmtpC', type: 'fruit' },
-  { name: 'cucumber', file: 'fIryGji', type: 'fruit' },
-
-  { name: 'feta', file: '7cjghip', type: 'dairy' },
-  { name: 'butter', file: 'hRT0VmL', type: 'dairy' },
-  { name: 'milk', file: 'hJp6lAA', type: 'dairy' },
-  { name: 'ghee', file: 'Oyoa7LM', type: 'dairy' }
-]
-
 class Shopping extends React.Component {
+  canBeShipped () {
+    let total = 0
+    for (var k in this.props.basket) { total += this.props.basket[k] }
+    return total > 0
+  }
+
   render () {
-    console.log(this.props)
-    const myStyle = this.props.basket['tomato']
-      ? null
-      : { visibility: 'hidden' }
+    const myStyle = this.canBeShipped() ? null : { visibility: 'hidden' }
     return (
       <Fragment>
         <div className='fruitList'>
-          {fruit.map((item, i) => (
+          {products.map(item => (
             <Fruit
               {...item}
               key={item.name}
@@ -37,19 +28,15 @@ class Shopping extends React.Component {
           ))}
         </div>
         <br clear='both' />
-        <MyButton style={myStyle} onClick={this.props.onFinishShopping} />
+        <div style={{ 'textAlign': 'center' }}>
+          <button style={myStyle} onClick={this.props.onFinishShopping}>
+            Finish
+          </button>
+          <button onClick={this.props.onClear}>Clear</button>
+        </div>
       </Fragment>
     )
   }
-}
-
-const MyButton = props => {
-  console.log(props)
-  return (
-    <button onClick={props.onClick} style={{ visibility: 'show' }}>
-      Finish
-    </button>
-  )
 }
 
 const mapStateToProps = store => {
@@ -63,13 +50,18 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     ...ownProps,
     onIncrement: text => () => {
       dispatch({
-        type: 'INCREASE',
+        type: 'INCREMENT',
         payload: text
       })
     },
     onFinishShopping: () => {
       dispatch({
         type: 'FINISH'
+      })
+    },
+    onClear: () => {
+      dispatch({
+        type: 'CLEAR'
       })
     }
   }

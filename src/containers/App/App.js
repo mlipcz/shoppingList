@@ -2,12 +2,14 @@ import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import Header from './components/Header/Header'
-import Shopping from './containers/Shopping/Shopping'
-import History from './containers/History/History'
-import store from './store'
+import Header from '../../components/Header/Header'
+import Shopping from '../../containers/Shopping/Shopping'
+import History from '../../containers/History/History'
+import ErrorPanel from '../../containers/ErrorPanel/ErrorPanel'
+import FinishingPanel from '../../containers/FinishingPanel/FinishingPanel'
 
-import axios from './axios-db'
+import store from '../../redux/store'
+import axios from '../../axios-db'
 
 import './App.css'
 
@@ -18,6 +20,8 @@ class App extends React.Component {
         <Router>
           <Fragment>
             <Header />
+            <ErrorPanel/>
+            <FinishingPanel/>
             <Switch>
               <Route path='/history' component={History} />
               <Route path='/' exact component={Shopping} />
@@ -37,4 +41,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+ export default App
