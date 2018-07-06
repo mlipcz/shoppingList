@@ -47,6 +47,10 @@ const clearError = (state, action) => {
   return { ...state, finishing: false, finished: false, error: null }
 }
 
+const historyLoaded = (state, action) => {
+  return { ...state, history: action.payload }
+}
+
 const reducer = (state = defaultState, action) => {
   console.log(state, action)
   switch (action.type) {
@@ -62,6 +66,8 @@ const reducer = (state = defaultState, action) => {
       return errorHandler(state, action)
     case 'CLEAR_ERROR':
       return clearError(state, action)
+    case 'HISTORY_LOADED':
+      return historyLoaded(state, action)
     default:
       return state
   }

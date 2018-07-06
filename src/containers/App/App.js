@@ -9,7 +9,6 @@ import ErrorPanel from '../../containers/ErrorPanel/ErrorPanel'
 import FinishingPanel from '../../containers/FinishingPanel/FinishingPanel'
 
 import store from '../../redux/store'
-import axios from '../../axios-db'
 
 import './App.css'
 
@@ -36,9 +35,6 @@ class App extends React.Component {
   //     localStorage.state = JSON.stringify(this.state)
   //   }
 
-  componentWillMount () {
-    axios.get('/shoppingHistory.json').then(res => {console.log("json",res.data)});
-  }
 }
 
  export default App
